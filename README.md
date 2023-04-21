@@ -1,0 +1,1 @@
+This is a Movie Rating application designed and created by Group 4 
