@@ -49,7 +49,7 @@ function Dashboard(props) {
                             onChange={(e) => setTitle(e.target.value)}
                             //value={title}
                             />
-                        {errors.title ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.make.message}</span> : null}
+                        {errors.title ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.title.message}</span> : null}
                     </div>
 
                     <div>
@@ -59,7 +59,7 @@ function Dashboard(props) {
                             onChange={(e) => setGenre(e.target.value)}
                             //value={genre}
                             />
-                        {errors.genre ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.modelName.message}</span> : null}
+                        {errors.genre ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.genre.message}</span> : null}
                     </div>
 
                     <div>
@@ -69,7 +69,7 @@ function Dashboard(props) {
                             onChange={(e) => setReview(e.target.value)}
                             //value={review}
                             />
-                        {errors.review ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.year.message}</span> : null}
+                        {errors.review ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.review.message}</span> : null}
                     </div>
 
                     <div>
@@ -79,7 +79,7 @@ function Dashboard(props) {
                             onChange={(e) => setRating(e.target.value)}
                             //value={rating}
                             />
-                        {errors.rating ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.price.message}</span> : null}
+                        {errors.rating ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.rating.message}</span> : null}
                     </div>
 
                     <button style={{cursor: 'pointer', width: '50px', height: '20px', textAlign: 'center'}}>Submit</button>
