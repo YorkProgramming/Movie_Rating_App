@@ -4,6 +4,8 @@ import React, {useState} from "react";
 import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import LoginRegister from './components/LoginRegister';
+import AllMovies from './components/AllMovies';
+
 
 
 function App() {
@@ -17,6 +19,7 @@ return (
           <Routes>
             <Route exact path ="/" element = {<LoginRegister setUser={setUser}/>}/>
             <Route exact path ="/dashboard" element = {<Dashboard user={user} setUser={setUser}/>}/>
+            <Route path="/movies" element={<AllMovies/> }/>
           </Routes>
         </BrowserRouter>
         
