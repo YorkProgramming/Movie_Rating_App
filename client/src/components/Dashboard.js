@@ -41,6 +41,7 @@ function Dashboard(props) {
     <   div className="Dashboard">
             <form onSubmit={onSubmitHandler}>
                 <div>
+                    <h1>Rate a Movie</h1>
                     <div>
                         <label style={{display: 'inline-block'}}>Title</label><br />
                         <input style= {{}}
