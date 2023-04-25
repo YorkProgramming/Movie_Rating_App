@@ -24,7 +24,7 @@ const AllMovies = (props) => {
         axios.delete(`http://localhost:8000/api/movies/${id}`)
         .then((res)=>{
             console.log(res)
-            navigate('/mando')
+            navigate('/movies')
         }).catch((err)=>{
             console.log(err)
         })
@@ -39,8 +39,8 @@ const tableStyle = {
     return (
         <div style={{}}>
             <a href='/' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "white"}}>Home</a>
-            <a href='/sell' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "white"}}>Sell</a>
-            <a href='/mando' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "white"}}>Browse</a>
+            <a href='/' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "white"}}>New Movie</a>
+
 
 
             <h1>Welcome</h1>
