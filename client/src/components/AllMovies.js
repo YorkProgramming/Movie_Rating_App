@@ -49,8 +49,8 @@ const tableStyle = {
 
                     <tr >
                         <th style={{width:"15%", textAlign:'left', borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>Movie</th>
-                        <th style={{width:"15%", textAlign:'left', borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>Model</th>
-                        <th  style={{width:"15%", textAlign:'left', backgroundColor: '#fff', color:'#000'}}>More Information</th>
+                        <th style={{width:"15%", textAlign:'left', borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>Rating</th>
+                        <th  style={{width:"15%", textAlign:'left', backgroundColor: '#fff', color:'#000'}}>Review</th>
                     </tr>
 
                 {
@@ -58,9 +58,10 @@ const tableStyle = {
                     list.map((movie) => [
                         <tr>
                             <td style={{width:"15%", borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>{movie.title}</td>
-                            <td style={{width:"15%", borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>{movie.genre}</td>
+                            <td style={{width:"15%", borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>{movie.rating}</td>
+                            <td style={{width:"15%", borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>{movie.review}</td>
+
                             <td style={{width:"15%", backgroundColor: '#fff', color:'#000'}}>
-                                <Link style={{textDecoration: "none", color: '#000'}}  to={`/movie/${movie._id}`}> </Link>
                                 <Link style={{textDecoration: "none", color: '#000'}} to={`/edit/${movie._id}`}>Edit</Link>
                                 <button onClick={deleteHandler}>Delete</button>
                             </td>
