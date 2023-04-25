@@ -75,7 +75,7 @@ function Dashboard(props) {
                     <div>
                         <label>Rating</label><br />
                         <input
-                            type="text" 
+                            type="number" 
                             onChange={(e) => setRating(e.target.value)}
                             //value={rating}
                             />
