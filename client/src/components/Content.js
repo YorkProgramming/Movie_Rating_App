@@ -1,73 +1,89 @@
 import React, { useEffect, useState } from 'react'; 
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 import { 
     Card, 
-    CardActions, 
     CardMedia, 
     CardContent, 
     Grid,
-    Typography
+    Typography,
+    CardActionArea
 } from '@mui/material';
 
-export default function Content(props) {
-    const [topRated, setTopRated] = useState("")
-    const [displayMovies, setDisplayMovies] = useState([])
+const Content = (props) => {
+    const [ratings, setRatings] = useState([])
+    const navigate = useNavigate("")
+    const [movieLoaded, setMovieLoaded] = useState(false)
+    const [userLoaded, setUserLoaded] = useState(false)
 
-    useEffect(() => {
-        getTopRated();
-        setTopRatedList();
-    })
+useEffect(() => {
+    getRatings()
+}, [])
 
-    const getTopRated = () => {
-        axios.get("http://localhost/api/rating/mostRatedMovie")
-            .then((res) => {
-                console.log(res.data)
-                const topRatedString = res.data.ToString()
-                setTopRated(topRatedString)
-            }).catch(err => console.log(err))
-    }
+    const getMovieData = (id) => {
 
-    const setTopRatedList = () => {
         const options = {
             method: 'GET',
-            url: 'https://moviesdatabase.p.rapidapi.com/titles/x/titles-by-ids',
-            params: {
-                idsList: topRated,
-                info: 'base'
-            },
+            url: 'https://moviesdatabase.p.rapidapi.com/titles/' + id,
+            params: {info: 'base_info'},
             headers: {
                 'content-type': 'application/octet-stream',
                 'X-RapidAPI-Key': '61ba4331ccmsh5a094dfeff5cc3dp11e673jsn594e2742bd37',
                 'X-RapidAPI-Host': 'moviesdatabase.p.rapidapi.com'
             }
-        }
+        };
+
         axios.request(options)
             .then((res) => {
-                console.log(res.data.results)
-                setDisplayMovies(res.data.results)
-            }).catch(err => console.log(err))
+                console.log(res.data.results);
+                setMovieLoaded(true)
+                return (
+                    movieLoaded ? 
+                    <>
+                        <img src={res.data.results.primaryImage.url}/>
+                        <p>{res.data.results.plot.text}</p>
+                    </> : null
+                )
+            }).catch(err => console.log(err));
+    };
+
+    const getUserData = (id) => {
+        axios.get("http://localhost:8000/api/user/" + id)
+        .then((res) => {
+            console.log(res.data);
+            setUserLoaded(true)
+            return (
+                userLoaded ?
+                <p>{res.data.firstName} {res.data.lastName}</p> : null
+            )
+        }).catch(err=>console.log(err));
     }
 
+    const getRatings = () => {
+        axios.get("http://localhost:8000/api/ratings")
+        .then((res) => {
+            console.log(res.data);
+            setRatings(res.data);
+        }).catch(err => console.log(err));
+    }
+    
     return (
         <Grid container justifyContent="space-around" sx={{m:.75}} spacing={2}>
-        { 
-            displayMovies.map((movie, i) => {
+        {
+            ratings.map((rating, i) => {
                 return (
                     <Grid item component={Card} sx={{m:1}} md={3} key={i}>
-                        <CardMedia
-                            text={movie.position}
-                            component="img"
-                            image = {movie.primaryImage.url}
-                        />
                         <CardContent style={{alignContent: 'left'}}>
-                            <Typography variant="subtitle" style={{color: 'dark gray'}}>{movie.releaseYear.year}</Typography>
-                            <Typography variant="subtitle2" ></Typography>
+                            <Typography>{rating.review}</Typography>
+                            <Typography>{rating.rating}</Typography>
+                            {getMovieData(rating.movie_id)} 
+                            {getUserData(rating.user_id)}
                         </CardContent>
-                        <CardActions/>
                     </Grid>
                 )
             })
-        }
+        } 
         </Grid>
     );
 }
+export default Content;
