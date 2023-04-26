@@ -23,7 +23,7 @@ function Dashboard(props) {
             })
             .then((res) => {
                 console.log(res.data)
-                navigate('/')
+                navigate('/movies')
                 setTitle("")
                 setGenre("")
                 setReview("")
