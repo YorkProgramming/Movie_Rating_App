@@ -41,6 +41,12 @@ function Dashboard(props) {
     <   div className="Dashboard">
             <form onSubmit={onSubmitHandler}>
                 <div>
+                    <div>
+                        <a href='/' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Login</a>
+                        <a href='/dashboard' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Rate a Movie</a>
+                        <a href='/movies' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Browse</a>
+                    </div>
+        
                     <h1>Rate a Movie</h1>
                     <div>
                         <label style={{display: 'inline-block'}}>Title</label><br />
