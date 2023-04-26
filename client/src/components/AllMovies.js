@@ -38,8 +38,9 @@ const tableStyle = {
 
     return (
         <div style={{}}>
-            <a href='/' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "white"}}>Home</a>
-            <a href='/' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "white"}}>New Movie</a>
+            <a href='/' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Login</a>
+            <a href='/dashboard' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Rate a Movie</a>
+            <a href='/movies' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Browse</a>
 
 
 
