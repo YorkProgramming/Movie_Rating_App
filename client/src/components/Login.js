@@ -34,39 +34,46 @@ const Login = (props) => {
     }
 
     return(
-        <div>
-            <form onSubmit={submitHandler}>
+        <div className="container my-5">
+            <div className="row justify-content-center">
+                <div className="col-sm-8 col-md-6 col-lg-4">
+                    <form onSubmit={submitHandler} className="p-3 border rounded">
+                        <h1 className="text-center mb-4">Log In</h1>
 
-            <h1>Log In</h1>
-                
-            <div className="form-fields">
-                        <label>Email</label>
-                        <input
+                        <div className="form-group">
+                            <label>Email</label>
+                            <input
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                             name="email"
                             type="text"
-                        />
-                    </div>
+                            className="form-control"
+                            />
+                        </div>
 
-                    
-                <div className="form-fields">
-                        <label>Password</label>
-                        <input
+                        <div className="form-group">
+                            <label>Password</label>
+                            <input
                             onChange={(e) => setPassword(e.target.value)}
                             value={password}
                             name="password"
                             type="password"
-                        />
-                    </div>
+                            className="form-control"
+                            />
+                        </div>
 
-                    <input className="submit-input" type="submit" value="Login"/>
-
-
-            </form>
-        </div>
+                        <div className="form-group">
+                            <input
+                            className="btn btn-primary btn-block"
+                            type="submit"
+                            value="Login"
+                            />
+                        </div>
+                    </form>
+                </div>
+            </div>
+    </div>
     );
-}
-
+};
 
     export default Login;
