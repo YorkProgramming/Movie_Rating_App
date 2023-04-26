@@ -1,7 +1,4 @@
-const User = require("../models/user.model.js");
-const jwt = require("jsonwebtoken");
-const bcrypt = require('bcrypt');
-require('dotenv').config();
+const User = require("../models/user.model");
 
 module.exports = {
 
@@ -29,6 +26,21 @@ module.exports = {
         });
     },
 
+    login: (async(req, res) => {
+
+    const { email, password } = req.body
+    const user = await User.findOne({ email })
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+        res.json({
+            user: user,
+            token: generateToken(user._id)})
+    } else {
+        res.status(400)
+        throw new Error('Invalid Email or Password')
+    }
+    }),
+
     deleteOneUser: (req, res) => {
         User.deleteOne({ _id: req.params.id })
         .then((deletedUser) => {
@@ -40,31 +52,6 @@ module.exports = {
             res.json({ message: "Something went wrong when deleting one" });
         });
     },
-
-    
-    loginUser: async(req, res) => {
-        console.log(req.body);
-        const user = await User.findOne({ email: req.body.email });
-        if(user === null) {
-            return res.sendStatus(400);
-        }
-
-        const correctPassword = await bcrypt.compare(req.body.password, user.password);
-        if(!correctPassword) {
-            return res.sendStatus(400);
-        }
-
-        const userToken = jwt.sign({
-            id: user._id
-        }, process.env.FIRST_SECRET_KEY);
- 
-        res
-            .cookie("usertoken", userToken, {
-            httpOnly: true
-            })
-            .json({ msg: "success!", user: user });
-    },
-
 
     findOneUser: (req, res) => {
         User.findOne({ _id: req.params.id })
