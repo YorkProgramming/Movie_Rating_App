@@ -41,57 +41,58 @@ const Register = (props) => {
     }
 
     return (
-        <div>
-
+        <div className="register-container">
             <form onSubmit={submitHandler}>
-
                 <h1>Register User</h1>
-
                 <div className="form-fields">
-                        <label>First Name</label>
-                        <input
-                            onChange={(e) => setFirstName(e.target.value)}
-                            value={firstName}
-                            name="firstName"
-                            type="text"
-                        />
-                    </div>
-
-                    <div className="form-fields">
-                        <label>Last Name</label>
-                        <input
-                            onChange={(e) => setLastName(e.target.value)}
-                            value={lastName}
-                            name="lastName"
-                            type="text"
-                        />
-                    </div>
-
-                <div className="form-fields">
-                        <label>Email</label>
-                        <input
-                            onChange={(e) => setEmail(e.target.value)}
-                            value={email}
-                            name="email"
-                            type="text"
-                        />
-                    </div>
-
-                <div className="form-fields">
-                    <label>Password</label>
+                    <label htmlFor="firstName">First Name</label>
                     <input
+                        className="form-control"
+                        onChange={(e) => setFirstName(e.target.value)}
+                        value={firstName}
+                        name="firstName"
+                        type="text"
+                        required
+                    />
+                </div>
+                <div className="form-fields">
+                    <label htmlFor="lastName">Last Name</label>
+                    <input
+                        className="form-control"
+                        onChange={(e) => setLastName(e.target.value)}
+                        value={lastName}
+                        name="lastName"
+                        type="text"
+                        required
+                    />
+                </div>
+                <div className="form-fields">
+                    <label htmlFor="email">Email</label>
+                    <input
+                        className="form-control"
+                        onChange={(e) => setEmail(e.target.value)}
+                        value={email}
+                        name="email"
+                        type="email"
+                        required
+                    />
+                </div>
+                <div className="form-fields">
+                    <label htmlFor="password">Password</label>
+                    <input
+                        className="form-control"
                         onChange={(e) => setPassword(e.target.value)}
                         value={password}
                         name="password"
                         type="password"
+                        required
                     />
                 </div>
-
-                <input className="submit-input" type="submit" value="Register"/>
-
+                <button className="btn btn-primary submit-btn" type="submit">
+                    Register
+                </button>
             </form>
         </div>
-
     );
 };
 

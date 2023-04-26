@@ -37,45 +37,57 @@ const tableStyle = {
 }
 
     return (
-        <div style={{}}>
-            <a href='/' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Login</a>
-            <a href='/dashboard' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Rate a Movie</a>
-            <a href='/movies' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Browse</a>
+        <div class="container-fluid">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" href="/dashboard">Movie Review App</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Rate a Movie</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/movies">Browse</a>
+                    </li>
+                </ul>
+                </div>
+            </nav>
 
-
-
-            <h1>Welcome</h1>
-            <div >
-                <table style={tableStyle}>
-
-                    <tr >
-                        <th style={{width:"15%", textAlign:'left', borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>Movie</th>
-                        <th style={{width:"15%", textAlign:'left', borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>Rating</th>
-                        <th  style={{width:"15%", textAlign:'left', backgroundColor: '#fff', color:'#000'}}>Review</th>
-                    </tr>
-
-                {
-
-                    list.map((movie) => [
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                <h1 class="mt-4 mb-4">Movie List</h1>
+                <table class="table table-striped table-dark">
+                    <thead>
                         <tr>
-                            <td style={{width:"15%", borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>{movie.title}</td>
-                            <td style={{width:"15%", borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>{movie.rating}</td>
-                            <td style={{width:"15%", borderRight:"solid black 2px", backgroundColor: '#fff', color:'#000'}}>{movie.review}</td>
-
-                            <td style={{width:"15%", backgroundColor: '#fff', color:'#000'}}>
-                                <Link style={{textDecoration: "none", color: '#000'}} to={`/edit/${movie._id}`}>Edit</Link>
-                                <button onClick={deleteHandler}>Delete</button>
-                            </td>
-
+                            <th style={{textAlign: 'left'}}>Movie</th>
+                            <th style={{textAlign: 'left'}}>Rating</th>
+                            <th style={{textAlign: 'left'}}>Review</th>
+                            <th style={{textAlign: 'left'}}>Actions</th>
                         </tr>
-                    ])
-                }
+                    </thead>
+                    <tbody>
+                        {list.map((movie) => (
+                        <tr key={movie._id}>
+                            <td>{movie.title}</td>
+                            <td>{movie.rating}</td>
+                            <td>{movie.review}</td>
+                            <td>
+                            <Link to={`/edit/${movie._id}`} class="btn btn-sm btn-primary mr-2">Edit</Link>
+                            <button onClick={() => deleteHandler(movie._id)} class="btn btn-sm btn-danger">Delete</button>
+                            </td>
+                        </tr>
+                        ))}
+                    </tbody>
                 </table>
+                </div>
             </div>
-            
-
         </div>
     )
-}
+};
 
 export default AllMovies;
