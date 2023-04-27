@@ -59,10 +59,10 @@ const AllMovies = (props) => {
                 <table className="table table-striped table-dark">
                     <thead>
                         <tr>
-                            <th style={{textAlign: 'left'}}>Movie</th>
-                            <th style={{textAlign: 'left'}}>Rating</th>
-                            <th style={{textAlign: 'left'}}>Review</th>
-                            <th style={{textAlign: 'left'}}>Actions</th>
+                            <th>Movie</th>
+                            <th>Rating</th>
+                            <th>Review</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>

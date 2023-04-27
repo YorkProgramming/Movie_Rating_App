@@ -22,13 +22,15 @@ const Dashboard = () => {
     }
 
     useEffect(() => {
-        axios.get('http://localhost:8000//api/user/:id')
-            .then(res => {
-                console.log(res.data);
-                setUser({ name: res.data.name });
-            })
-            .catch(err => console.log(err))
-    }, []);
+        if (user) {
+            axios.get(`http://localhost:8000/api/user/${user.id}`)
+                .then(res => {
+                    console.log(res.data);
+                    setUser({ name: res.data.name });
+                })
+                .catch(err => console.log(err))
+        }
+    }, [user]);
 
     const formValidator = () => {
     let isValid = true
@@ -183,11 +185,11 @@ const Dashboard = () => {
                     <button className="btn btn-primary mt-3" type="submit">
                     Submit
                     </button>
+                    <Link to="/movies" className="btn btn-primary mt-4 pb-2 pt-2">
+                    Back
+                    </Link>
                 </div>
                 </form>
-                <Link to="/movies" className="btn btn-secondary">
-                Back
-                </Link>
             </div>
         </div>
     );
