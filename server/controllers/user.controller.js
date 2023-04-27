@@ -43,27 +43,31 @@ module.exports = {
 
     
     loginUser: async(req, res) => {
-        console.log(req.body);
-        const user = await User.findOne({ email: req.body.email });
-        if(user === null) {
-            return res.sendStatus(400);
-        }
-
-        const correctPassword = await bcrypt.compare(req.body.password, user.password);
-        if(!correctPassword) {
-            return res.sendStatus(400);
-        }
-
-        const userToken = jwt.sign({
-            id: user._id
-        }, process.env.FIRST_SECRET_KEY);
- 
-        res
-            .cookie("usertoken", userToken, {
-            httpOnly: true
-            })
-            .json({ msg: "success!", user: user });
-    },
+        try {
+            const user = await User.findOne({ email: req.body.email });
+            if (user === null) {
+                return res.sendStatus(400);
+            }
+        
+            const correctPassword = await bcrypt.compare(req.body.password, user.password);
+            if (!correctPassword) {
+                return res.sendStatus(400);
+            }
+        
+            const userToken = jwt.sign({
+                id: user._id
+            }, process.env.FIRST_SECRET_KEY);
+        
+            res
+                .cookie("usertoken", userToken, {
+                httpOnly: true
+                })
+                .json({ msg: "success!", user: user });
+            } catch (err) {
+            console.error(err);
+            res.status(500).json({ error: "Internal Server Error" });
+            }
+        },
 
 
     findOneUser: (req, res) => {

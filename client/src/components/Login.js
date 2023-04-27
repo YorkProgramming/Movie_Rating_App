@@ -1,13 +1,13 @@
 import React, {useState} from "react";
 import axios from "axios";
-import { useNavigate, navigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const Login = (props) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const navigate = useNavigate();
+    const navigateTo = useNavigate();
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -24,7 +24,7 @@ const Login = (props) => {
                 props.setUser(res.data.user);
                 setEmail("");
                 setPassword("");
-                navigate("/dashboard");
+                navigateTo("/dashboard");
             }
         })
         .catch((err) => {
@@ -63,17 +63,15 @@ const Login = (props) => {
                         </div>
 
                         <div className="form-group">
-                            <input
-                            className="btn btn-primary btn-block"
-                            type="submit"
-                            value="Login"
-                            />
+                            <button className="btn btn-primary btn-block" type="submit">
+                                Login
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
-    </div>
+        </div>
     );
 };
 
-    export default Login;
+export default Login;
