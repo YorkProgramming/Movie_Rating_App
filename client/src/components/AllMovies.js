@@ -30,38 +30,33 @@ const AllMovies = (props) => {
         })
     }
 
-const tableStyle = {
-    border:'2px solid black',
-    width:"50%",
-    margin: '5% 25% 5% 25%'
-}
 
     return (
-        <div class="container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="/dashboard">Movie Review App</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+        <div className="container-fluid">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a className="navbar-brand" href="/dashboard">Movie Review App</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Login</a>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <a className="nav-link" href="/">Login</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">Rate a Movie</a>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/dashboard">Rate a Movie</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/movies">Browse</a>
+                    <li className="nav-item active">
+                        <a className="nav-link" href="/movies">Browse</a>
                     </li>
                 </ul>
                 </div>
             </nav>
 
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                <h1 class="mt-4 mb-4">Movie List</h1>
-                <table class="table table-striped table-dark">
+            <div className="row justify-content-center">
+                <div className="col-lg-8">
+                <h1 className="mt-4 mb-4">Movie List</h1>
+                <table className="table table-striped table-dark">
                     <thead>
                         <tr>
                             <th style={{textAlign: 'left'}}>Movie</th>
@@ -77,8 +72,8 @@ const tableStyle = {
                             <td>{movie.rating}</td>
                             <td>{movie.review}</td>
                             <td>
-                            <Link to={`/edit/${movie._id}`} class="btn btn-sm btn-primary mr-2">Edit</Link>
-                            <button onClick={() => deleteHandler(movie._id)} class="btn btn-sm btn-danger">Delete</button>
+                            <Link to={`/edit/${movie._id}`} className="btn btn-sm btn-primary mr-2">Edit</Link>
+                            <button onClick={() => deleteHandler(movie._id)} className="btn btn-sm btn-danger">Delete</button>
                             </td>
                         </tr>
                         ))}

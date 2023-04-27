@@ -1,121 +1,196 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
-import { useNavigate, navigate, Link } from "react-router-dom";
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { Link, useNavigate } from 'react-router-dom'
 import '../App.css';
 
-function Dashboard(props) {
-    const navigate = useNavigate();
-    const [title, setTitle] = useState("");
-    const [genre, setGenre] = useState("");
-    const [rating, setRating] = useState("");
-    const [review, setReview] = useState("");
-    
-    const [errors, setErrors] = useState({});
+const Dashboard = () => {
+    const [movie, setMovie] = useState({
+        title: '',
+        genre: '',
+        rating: '',
+        review: ''
+    })
+    const [errors, setErrors] = useState({})
+    const [user, setUser] = useState('');
+    const navigate = useNavigate()
 
-    const onSubmitHandler = (e) => {
-        e.preventDefault();
-        axios
-            .post("http://localhost:8000/api/movies/new", {
-                title,
-                genre,
-                review,
-                rating
-            })
-            .then((res) => {
-                console.log(res.data)
-                navigate('/movies')
-                setTitle("")
-                setGenre("")
-                setReview("")
-                setRating("")
+    const onChangeHandler = (e) => {
+    setMovie({
+        ...movie,
+        [e.target.name]: e.target.value
+    })
+    }
 
+    useEffect(() => {
+        axios.get('http://localhost:8000//api/user/:id')
+            .then(res => {
+                console.log(res.data);
+                setUser({ name: res.data.name });
             })
-            .catch((err) => {
-                console.log(err)
-                console.log("Validation Error from the back end")
-                setErrors(err.response.data.errors)
-            })
+            .catch(err => console.log(err))
+    }, []);
+
+    const formValidator = () => {
+    let isValid = true
+    if (movie.title.length < 3) {
+        isValid = false
+    }
+    if (movie.genre.length < 3) {
+        isValid = false
+    }
+    if (movie.rating < 1 || movie.rating > 5) {
+        isValid = false
+    }
+    if (movie.review.length < 10) {
+        isValid = false
+    }
+    return isValid
+    }
+
+    const handleSubmit = (e) => {
+    e.preventDefault()
+    if (formValidator()) {
+        axios.post('http://localhost:8000/api/movies/new', movie)
+        .then(res => {
+            console.log(res)
+            navigate('/movies')
+        })
+        .catch(err => {
+            console.log(err)
+            setErrors(err.response.data)
+        })
+    } else {
+        setErrors({
+        title: 'Title must be at least 3 characters',
+        genre: 'Genre must be at least 3 characters',
+        rating: 'Rating must be between 1 and 5',
+        review: 'Review must be at least 10 characters'
+        })
+    }
     }
 
     return (
-        <div className='container-fluid'>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="/dashboard">Movie Review App</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+        <div className="container-fluid">
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a className="navbar-brand" href="/dashboard">
+                Movie Review App
+                </a>
+                <button
+                className="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+                >
+                <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Login</a>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                    <a className="nav-link" href="/">
+                        Login
+                    </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">Rate a Movie</a>
+                    <li className="nav-item">
+                    <a className="nav-link" href="/dashboard">
+                        Rate a Movie
+                    </a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/movies">Browse</a>
+                    <li className="nav-item active">
+                    <a className="nav-link" href="/movies">
+                        Browse
+                    </a>
                     </li>
                 </ul>
                 </div>
+                <h1 className="nav-item active">Hello {user.firstName}</h1>
             </nav>
             <div className="Dashboard">
-                <form onSubmit={onSubmitHandler}>
+                <form onSubmit={handleSubmit}>
+                <div>
                     <div>
-                        <div>
-                            <a href='/' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Login</a>
-                            <a href='/dashboard' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Rate a Movie</a>
-                            <a href='/movies' style={{margin:"10px 30px 10px 30px", textDecoration:'none', color: "black"}}>Browse</a>
-                        </div>
-            
-                        <h1>Rate a Movie</h1>
-                        <div>
-                            <label style={{display: 'inline-block'}}>Title</label><br />
-                            <input style= {{}}
-                                type="text" 
-                                onChange={(e) => setTitle(e.target.value)}
-                                //value={title}
-                                />
-                            {errors.title ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.title.message}</span> : null}
-                        </div>
-
-                        <div>
-                            <label style={{display: 'inline-block', marginRight: '10px'}}>Genre</label><br />
-                            <input style= {{}}
-                                type="text" 
-                                onChange={(e) => setGenre(e.target.value)}
-                                //value={genre}
-                                />
-                            {errors.genre ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.genre.message}</span> : null}
-                        </div>
-
-                        <div>
-                            <label>Review</label><br />
-                            <input
-                                type="text" 
-                                onChange={(e) => setReview(e.target.value)}
-                                //value={review}
-                                />
-                            {errors.review ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.review.message}</span> : null}
-                        </div>
-
-                        <div>
-                            <label>Rating</label><br />
-                            <input
-                                type="number" 
-                                onChange={(e) => setRating(e.target.value)}
-                                //value={rating}
-                                />
-                            {errors.rating ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.rating.message}</span> : null}
-                        </div>
-
-                        <button>Submit</button>
-
+                    <label htmlFor="title">Title:</label>
+                    <input
+                        type="text"
+                        name="title"
+                        id="title"
+                        className="form-control"
+                        value={movie.title}
+                        onChange={onChangeHandler}
+                        required
+                    />
                     </div>
+                    {errors.title && (
+                    <p className="text-danger">{errors.title.message}</p>
+                    )}
+                </div>
+                <div>
+                    <div>
+                    <label htmlFor="genre">Genre:</label>
+                    <input
+                        type="text"
+                        name="genre"
+                        id="genre"
+                        className="form-control"
+                        value={movie.genre}
+                        onChange={onChangeHandler}
+                        required
+                    />
+                    </div>
+                    {errors.genre && (
+                    <p className="text-danger">{errors.genre.message}</p>
+                    )}
+                </div>
+                <div>
+                    <div>
+                    <label htmlFor="rating">Rating:</label>
+                    <input
+                        type="number"
+                        name="rating"
+                        id="rating"
+                        className="form-control"
+                        min="1"
+                        max="10"
+                        value={movie.rating}
+                        onChange={onChangeHandler}
+                        required
+                    />
+                    </div>
+                    {errors.rating && (
+                    <p className="text-danger">{errors.rating.message}</p>
+                    )}
+                </div>
+                <div>
+                    <div>
+                    <label htmlFor="review">Review:</label>
+                    <textarea
+                        name="review"
+                        id="review"
+                        className="form-control"
+                        rows="5"
+                        value={movie.review}
+                        onChange={onChangeHandler}
+                        required
+                    ></textarea>
+                    </div>
+                    {errors.review && (
+                    <p className="text-danger">{errors.review.message}</p>
+                    )}
+                </div>
+                <div>
+                    <button className="btn btn-primary mt-3" type="submit">
+                    Submit
+                    </button>
+                </div>
                 </form>
-
+                <Link to="/movies" className="btn btn-secondary">
+                Back
+                </Link>
             </div>
         </div>
     );
-}
+};
 
 export default Dashboard;
