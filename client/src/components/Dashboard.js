@@ -29,7 +29,8 @@ const Dashboard = () => {
                     setUser({ name: res.data.name });
                 })
                 .catch(err => console.log(err))
-        }
+            }
+
     }, [user]);
 
     const formValidator = () => {
@@ -58,8 +59,8 @@ const Dashboard = () => {
             navigate('/movies')
         })
         .catch(err => {
-            console.log(err)
-            setErrors(err.response.data)
+            console.log(err.response.data.errors)
+            setErrors(err.response.data.errors)
         })
     } else {
         setErrors({

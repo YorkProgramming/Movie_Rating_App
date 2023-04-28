@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-import { useNavigate, useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import '../App.css';
 
 const Update = (props) => {
@@ -15,14 +15,18 @@ const Update = (props) => {
 
     useEffect (() => {
         getReviewData(id)
-    })
+    }, [])
 
     const getReviewData = (id) => {
         axios
-            .post("http://localhost:8000/api/rating/" + id)
+            .get("http://localhost:8000/api/movies/" + id)
             .then((res) => {
                 console.log(res.data)
-                setRating(res.data)
+                setTitle(res.data.title)
+                setGenre(res.data.genre)
+                setReview(res.data.review)
+                setRating(res.data.rating)
+    })
                 setLoaded(true)
             })
             .catch((err) => {
@@ -35,7 +39,7 @@ const Update = (props) => {
     const onSubmitHandler = (e) => {
         e.preventDefault();
         axios
-            .post("http://localhost:8000/api/movies/new", {
+            .put("http://localhost:8000/api/movies/edit/" + id, {
                 title,
                 genre,
                 review,
@@ -44,11 +48,6 @@ const Update = (props) => {
             .then((res) => {
                 console.log(res.data)
                 navigate('/movies')
-                setTitle("")
-                setGenre("")
-                setReview("")
-                setRating("")
-                navigate("/home")
             })
             .catch((err) => {
                 console.log(err)
@@ -59,21 +58,21 @@ const Update = (props) => {
 
     return (
         <div className='container-fluid'>
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="/dashboard">Movie Review App</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a className="navbar-brand" href="/dashboard">Movie Review App</a>
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Login</a>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <a className="nav-link" href="/">Login</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/dashboard">Rate a Movie</a>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/dashboard">Rate a Movie</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/movies">Browse</a>
+                    <li className="nav-item active">
+                        <a className="nav-link" href="/movies">Browse</a>
                     </li>
                 </ul>
                 </div>
@@ -94,7 +93,7 @@ const Update = (props) => {
                                 <input style= {{}}
                                     type="text" 
                                     onChange={(e) => setTitle(e.target.value)}
-                                    value={rating.title}
+                                    defaultValue={title}
                                     />
                                 {errors.title ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.title.message}</span> : null}
                             </div>
@@ -104,7 +103,7 @@ const Update = (props) => {
                                 <input style= {{}}
                                     type="text" 
                                     onChange={(e) => setGenre(e.target.value)}
-                                    value={rating.genre}
+                                    defaultValue={genre}
                                     />
                                 {errors.genre ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.genre.message}</span> : null}
                             </div>
@@ -114,7 +113,8 @@ const Update = (props) => {
                                 <input
                                     type="text" 
                                     onChange={(e) => setReview(e.target.value)}
-                                    value={rating.review}
+                                    defaultValue={review}
+
                                     />
                                 {errors.review ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.review.message}</span> : null}
                             </div>
@@ -124,7 +124,7 @@ const Update = (props) => {
                                 <input
                                     type="number" 
                                     onChange={(e) => setRating(e.target.value)}
-                                    value={rating.rating}
+                                    defaultValue={rating}
                                     />
                                 {errors.rating ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.rating.message}</span> : null}
                             </div>

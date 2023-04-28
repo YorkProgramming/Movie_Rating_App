@@ -5,6 +5,7 @@ import Register from './components/Register';
 import Dashboard from './components/Dashboard';
 import LoginRegister from './components/LoginRegister';
 import AllMovies from './components/AllMovies';
+import Update from './components/Update';
 
 
 
@@ -20,6 +21,7 @@ return (
             <Route exact path ="/" element = {<LoginRegister setUser={setUser}/>}/>
             <Route exact path ="/dashboard" element = {<Dashboard user={user} setUser={setUser}/>}/>
             <Route path="/movies" element={<AllMovies/> }/>
+            <Route path="/edit/:id" element={<Update/>}/>
           </Routes>
         </BrowserRouter>
         

@@ -7,5 +7,5 @@ module.exports = (app) => {
     app.post('/api/movies/new', MovieController.createNewMovie);
     app.get('/api/movies/:id', MovieController.findOneMovie);
     app.delete('/api/movies/:id', MovieController.deleteOneMovie);
-    app.patch('/api/movies/edit/:id', MovieController.updateMovie);
+    app.put('/api/movies/edit/:id', MovieController.updateMovie);
 }

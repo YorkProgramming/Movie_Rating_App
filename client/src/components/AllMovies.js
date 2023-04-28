@@ -1,6 +1,7 @@
 import { useState, useEffect} from 'react';
 import axios from 'axios';
 import { Link, useNavigate, useParams} from 'react-router-dom';
+import Delete from '../components/Delete';
 
 
 
@@ -20,14 +21,8 @@ const AllMovies = (props) => {
 
     }, [])      //dependency array
 
-    const deleteHandler = () =>{
-        axios.delete(`http://localhost:8000/api/movies/${id}`)
-        .then((res)=>{
-            console.log(res)
-            navigate('/movies')
-        }).catch((err)=>{
-            console.log(err)
-        })
+    const removeFromDom = id => {
+        setList(list.filter(list => list._id !== id))
     }
 
 
@@ -70,10 +65,12 @@ const AllMovies = (props) => {
                         <tr key={movie._id}>
                             <td>{movie.title}</td>
                             <td>{movie.rating}</td>
-                            <td>{movie.review}</td>
+                            <td>
+                                <div style={{width: "100%", overflow: "hidden"}}>{movie.review}</div>
+                            </td>
                             <td>
                             <Link to={`/edit/${movie._id}`} className="btn btn-sm btn-primary mr-2">Edit</Link>
-                            <button onClick={() => deleteHandler(movie._id)} className="btn btn-sm btn-danger">Delete</button>
+                            <Delete id={movie._id} successCallback = {() => removeFromDom(movie._id)}/>
                             </td>
                         </tr>
                         ))}
