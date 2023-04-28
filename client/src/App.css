@@ -1,0 +1,155 @@
+.App {
+  text-align: center;
+}
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  height: 100vh;
+}
+
+form {
+  width: 100%;
+  max-width: 30rem;
+  padding: 2rem;
+  background-color: #1d1b31;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.form-fields {
+  margin-bottom: 1rem;
+}
+
+label {
+  display: block;
+}
+
+input {
+  width: 100%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border-radius: 3px;
+  border: none;
+  background-color: #24223d;
+  color: #fff;
+}
+
+.submit-input {
+  margin-top: 1rem;
+  width: 100%;
+  background-color: #a78fe3;
+  color: #fff;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 3px;
+}
+
+.submit-input:hover {
+  background-color: #8462a7;
+}
+
+.form-control:focus {
+  outline: none;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Dashboard */
+.Dashboard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1d1b31;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.Dashboard a {
+  margin: 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+.Dashboard h1 {
+  margin-bottom: 20px;
+}
+
+.Dashboard label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+.Dashboard input[type="text"],
+.Dashboard input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 3px;
+  border: none;
+  background-color: #fff;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.Dashboard button[type="submit"] {
+  background-color: #a78fe3;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.Dashboard button[type="submit"]:hover {
+  background-color: #8462a7;
+}
+
+.Dashboard span {
+  margin: 10px;
+  color: red;
+  font-weight: normal;
+}
+
+
+/* AllMovies */
+body {
+  background-color: #2e2d4d;
+}
+
+.navbar {
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+  width: 100%;
+}
+
+.navbar-brand, .nav-link {
+  color: #fff;
+}
+
+.table th, .table td {
+  color: #fff;
+}
+
+.btn-primary {
+  background-color: #7d5fff;
+  border-color: #7d5fff;
+}
+
+.btn-primary:hover {
+  background-color: #6c4ce6;
+  border-color: #6c4ce6;
+}
+
+.btn-danger {
+  background-color: #ff5c5c;
+  border-color: #ff5c5c;
+}
+
+.btn-danger:hover {
+  background-color: #e64646;
+  border-color: #e64646;
+}
