@@ -26,6 +26,7 @@ const Update = (props) => {
                 setGenre(res.data.genre)
                 setReview(res.data.review)
                 setRating(res.data.rating)
+    })
                 setLoaded(true)
             })
             .catch((err) => {
@@ -113,6 +114,7 @@ const Update = (props) => {
                                     type="text" 
                                     onChange={(e) => setReview(e.target.value)}
                                     defaultValue={review}
+
                                     />
                                 {errors.review ? <span style={{margin: '10px',color:"red", fontWeight: 'normal'}}>{errors.review.message}</span> : null}
                             </div>

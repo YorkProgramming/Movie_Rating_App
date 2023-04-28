@@ -7,7 +7,7 @@ const Login = (props) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const navigate = useNavigate();
+    const navigateTo = useNavigate();
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -24,7 +24,7 @@ const Login = (props) => {
                 props.setUser(res.data.user);
                 setEmail("");
                 setPassword("");
-                navigate("/dashboard");
+                navigateTo("/dashboard");
             }
         })
         .catch((err) => {

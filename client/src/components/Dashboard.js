@@ -30,6 +30,7 @@ const Dashboard = () => {
                 })
                 .catch(err => console.log(err))
             }
+
     }, [user]);
 
     const formValidator = () => {
